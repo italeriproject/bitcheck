@@ -24,8 +24,7 @@
 
 <script>
 var Timer = function() {
-	//fetch('http://bit:check@27.133.132.138:8051/getData.php?type=quoine_chart',{
-	fetch('/getData.php?type=quoine_chart',{
+	fetch('https://api.quoine.com/products/5',{
 	})
 	.then((res) => {
 		return res.json();
