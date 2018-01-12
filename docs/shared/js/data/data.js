@@ -134,23 +134,6 @@ var chart = new Chart(ctx, {
             borderWidth: 5,                      // 塗りつぶさない
             fill: false,                      // 塗りつぶさない
             lineTension: 0                    // 直線
-        }, {
-	// quoine
-            data: [],
-            label: 'quoine-Ask',                    // 売り取引データ
-            borderColor: 'rgb(54, 162, 235, 10)', // 線の色
-            backgroundColor: 'rgba(54, 162, 235, 0.5)', // 塗りの色
-            borderWidth: 5,                      // 塗りつぶさない
-            fill: false,                      // 塗りつぶさない
-            lineTension: 0                    // 直線
-        }, {
-            data: [],
-            label: 'quoine-Bid',                    // 売り取引データ
-            borderColor: 'rgb(255, 99, 132)', // 線の色
-            backgroundColor: 'rgba(255, 99, 132, 0.5)', // 塗りの色
-            borderWidth: 5,                      // 塗りつぶさない
-            fill: false,                      // 塗りつぶさない
-            lineTension: 0                    // 直線
         }]
     },
     options: {
