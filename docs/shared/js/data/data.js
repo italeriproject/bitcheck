@@ -1,8 +1,5 @@
-// wss://ws.zaif.jp:8888/stream?currency_pair=btc_jpy
-// http://btcojisan.info/archives/4250415.html
-
 var buf = {};
-buf['Chart'] = [[], [], [], [], [], [], [], []];
+buf['Chart'] = [[], [], [], [], [], []];
 
 // coincheck
 var ws = new WebSocket('wss://ws-api.coincheck.com/');
@@ -26,10 +23,6 @@ var pubnub = new PubNub({
 });
 pubnub.addListener({
     message: function (message) {
-//        console.log(message.channel);
-//        console.log(message.channel, message.message);
-//        console.log(message.message.best_bid);
-	// ask
     buf['Chart'][2].push({
         x: Date.now(), // タイムスタンプ（ミリ秒）
         y: message.message.best_ask // 価格（日本円）
@@ -38,22 +31,6 @@ pubnub.addListener({
         x: Date.now(), // タイムスタンプ（ミリ秒）
         y: message.message.best_bid // 価格（日本円）
     });
-
-/*
-  "product_code": "BTC_JPY",
-  "timestamp": "2015-07-08T02:50:59.97",
-  "tick_id": 3579,
-  "best_bid": 30000,
-  "best_ask": 36640,
-  "best_bid_size": 0.1,
-  "best_ask_size": 5,
-  "total_bid_depth": 15.13,
-  "total_ask_depth": 20,
-  "ltp": 31690,
-  "volume": 16819.26,
-  "volume_by_product": 6819.26
-}
-*/
     }
 });
 pubnub.subscribe({
@@ -74,6 +51,7 @@ ws_zaif.onmessage = function(msg) { // メッセージ更新時のコールバ�
 }
 
 // Quoine
+/*
 var Timer = function() {
 	//fetch('http://bit:check@27.133.132.138:8051/getData.php?type=quoine_chart',{
 	//fetch('http://bit:check@27.133.132.138:8051/getData.php?type=quoine_chart',{
@@ -96,6 +74,7 @@ var Timer = function() {
 	})
 };
 var timerID = setInterval(Timer, 5000);
+*/
 
 var id = 'Chart';
 var ctx = document.getElementById(id).getContext('2d');
@@ -128,18 +107,6 @@ var chart = new Chart(ctx, {
 //            pointBorderColor: 'rgba(0, 128, 0, 1)', // 塗りの色
             borderWidth: 5,                      // 塗りつぶさない
             pointStyle: 'star',                      // 塗りつぶさない
-/*
-    'circle'
-    'cross'
-    'crossRot'
-    'dash'
-    'line'
-    'rect'
-    'rectRounded'
-    'rectRot'
-    'star'
-    'triangle'
-*/
             fill: false,                      // 塗りつぶさない
             lineTension: 0                    // 直線
         }, {
@@ -219,13 +186,7 @@ var chart = new Chart(ctx, {
                     Array.prototype.push.apply(
                         chart.data.datasets[5].data, buf[id][5]
                     );            // 売り取引データをチャートに追加
-                    Array.prototype.push.apply(
-                        chart.data.datasets[6].data, buf[id][6]
-                    );            // 売り取引データをチャートに追加
-                    Array.prototype.push.apply(
-                        chart.data.datasets[7].data, buf[id][7]
-                    );            // 売り取引データをチャートに追加
-                    buf[id] = [[], [], [], [], [], [], [], []]; // バッファをクリア
+                    buf[id] = [[], [], [], [], [], []]; // バッファをクリア
                 }
             }
         }
