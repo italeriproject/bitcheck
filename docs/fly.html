@@ -25,6 +25,8 @@
 <script>
 var Timer = function() {
 	fetch('https://api.quoine.com/products/5',{
+mode: 'cors',
+  credentials: 'include'
 	})
 	.then((res) => {
 		return res.json();
