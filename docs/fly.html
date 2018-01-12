@@ -14,7 +14,6 @@
 <script type="text/javascript" src="/shared/js/chartjs-plugin-streaming.js"></script>
 <script type="text/javascript" src="/shared/js/pusher.js"></script>
 
-<script src="https://cdn.pubnub.com/sdk/javascript/pubnub.4.20.0.js"></script>
 
 <title>Bit Check</title>
 </head>
@@ -23,6 +22,22 @@
 <canvas id="Chart"></canvas>
 </div>
 
-<script type="text/javascript" src="/shared/js/data/data.js"></script>
+<script>
+var Timer = function() {
+	//fetch('http://bit:check@27.133.132.138:8051/getData.php?type=quoine_chart',{
+	fetch('/getData.php?type=quoine_chart',{
+	})
+	.then((res) => {
+		return res.json();
+	}).then((json) => {
+    console.log('success:', json.market_bid);
+    console.log('success:', Math.floor(json.market_bid));
+	}).catch((ex) => {
+    console.log('failed:', ex);
+	})
+};
+var timerID = setInterval(Timer, 5000);
+
+</script>
 </body>
 </html>
